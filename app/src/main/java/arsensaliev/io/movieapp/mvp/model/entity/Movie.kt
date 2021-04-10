@@ -8,152 +8,79 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Movie(
-    @SerializedName("Title")
+    @SerializedName("adult")
     @Expose
-    val title: String? = null,
+    val adult: Boolean? = null,
 
-    @SerializedName("Year")
+    @SerializedName("backdrop_path")
     @Expose
-    val year: String? = null,
+    val backdropPath: String? = null,
 
-    @SerializedName("Rated")
+    @SerializedName("genre_ids")
     @Expose
-    val rated: String? = null,
+    val genreIds: List<Int>? = null,
 
-    @SerializedName("Released")
+    @SerializedName("id")
     @Expose
-    val released: String? = null,
+    val id: Int,
 
-    @SerializedName("Runtime")
+    @SerializedName("original_language")
     @Expose
-    val runtime: String? = null,
+    val originalLanguage: String? = null,
 
-    @SerializedName("Genre")
+    @SerializedName("original_title")
     @Expose
-    val genre: String? = null,
+    val originalTitle: String? = null,
 
-    @SerializedName("Director")
+    @SerializedName("overview")
     @Expose
-    val director: String? = null,
+    val overview: String? = null,
 
-    @SerializedName("Writer")
+    @SerializedName("popularity")
     @Expose
-    val writer: String? = null,
+    val popularity: Double? = null,
 
-    @SerializedName("Actors")
+    @SerializedName("poster_path")
     @Expose
-    val actors: String? = null,
+    val posterPath: String? = null,
 
-    @SerializedName("Plot")
+    @SerializedName("release_date")
     @Expose
-    val plot: String? = null,
+    val releaseDate: String? = null,
 
-    @SerializedName("Language")
+    @SerializedName("title")
     @Expose
-    val language: String? = null,
+    val title: String,
 
-    @SerializedName("Country")
+    @SerializedName("video")
     @Expose
-    val country: String? = null,
+    val video: Boolean? = null,
 
-    @SerializedName("Awards")
+    @SerializedName("vote_average")
     @Expose
-    val awards: String? = null,
+    val voteAverage: Double? = null,
 
-    @SerializedName("Poster")
+    @SerializedName("vote_count")
     @Expose
-    val poster: String? = null,
-
-    @SerializedName("Ratings")
-    @Expose
-    val ratings: List<Rating>? = ArrayList(),
-
-    @SerializedName("Metascore")
-    @Expose
-    val metascore: String? = null,
-
-    @SerializedName("imdbRating")
-    @Expose
-    val imdbRating: String? = null,
-
-    @SerializedName("imdbVotes")
-    @Expose
-    val imdbVotes: String? = null,
-
-    @SerializedName("imdbID")
-    @Expose
-    val imdbID: String,
-
-    @SerializedName("Type")
-    @Expose
-    val type: String? = null,
-
-    @SerializedName("DVD")
-    @Expose
-    val dvd: String? = null,
-
-    @SerializedName("BoxOffice")
-    @Expose
-    val boxOffice: String? = null,
-
-    @SerializedName("Production")
-    @Expose
-    val production: String? = null,
-
-    @SerializedName("Website")
-    @Expose
-    val website: String? = null
+    val voteCount: Int? = null,
 ) : Parcelable {
-    constructor(movie: Movie) : this(
-        title = movie.title,
-        year = movie.year,
-        rated = movie.rated,
-        released = movie.released,
-        runtime = movie.runtime,
-        genre = movie.genre,
-        director = movie.director,
-        writer = movie.writer,
-        actors = movie.actors,
-        plot = movie.plot,
-        language = movie.language,
-        country = movie.country,
-        awards = movie.awards,
-        poster = movie.poster,
-        ratings = movie.ratings,
-        metascore = movie.metascore,
-        imdbRating = movie.imdbRating,
-        imdbVotes = movie.imdbVotes,
-        imdbID = movie.imdbID,
-        type = movie.type,
-        dvd = movie.dvd,
-        boxOffice = movie.boxOffice,
-        production = movie.production,
-        website = movie.website
+    constructor(roomMovie: RoomMovie) : this(
+        adult = roomMovie.adult,
+        backdropPath = roomMovie.backdropPath,
+        id = roomMovie.id,
+        originalLanguage = roomMovie.originalLanguage,
+        originalTitle = roomMovie.originalTitle,
+        overview = roomMovie.overview,
+        popularity = roomMovie.popularity,
+        posterPath = roomMovie.posterPath,
+        releaseDate = roomMovie.releaseDate,
+        title = roomMovie.title,
+        video = roomMovie.video,
+        voteAverage = roomMovie.voteAverage,
+        voteCount = roomMovie.voteCount
     )
 
-    constructor(movie: RoomMovie) : this(
-        title = movie.title,
-        year = movie.year,
-        rated = movie.rated,
-        released = movie.released,
-        runtime = movie.runtime,
-        genre = movie.genre,
-        director = movie.director,
-        writer = movie.writer,
-        actors = movie.actors,
-        plot = movie.plot,
-        language = movie.language,
-        country = movie.country,
-        awards = movie.awards,
-        poster = movie.poster,
-        metascore = movie.metascore,
-        imdbRating = movie.imdbRating,
-        imdbVotes = movie.imdbVotes,
-        imdbID = movie.imdbID,
-        type = movie.type,
-        dvd = movie.dvd,
-        boxOffice = movie.boxOffice,
-        production = movie.production,
-        website = movie.website
-    )
+    val posterUrl: String
+        get() = posterPath?.let { "https://image.tmdb.org/t/p/w500$it" }
+            ?: "https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png"
 }

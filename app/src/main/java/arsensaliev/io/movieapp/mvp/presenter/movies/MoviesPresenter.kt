@@ -60,8 +60,8 @@ class MoviesPresenter : MvpPresenter<MoviesView>() {
 
         override fun bindView(view: IMovieItemView) {
             val movie = movies[view.pos]
-            movie.title?.let { view.setTitle(it) }
-            movie.poster?.let { view.setPoster(it) }
+            view.setTitle(movie.title)
+            view.setPoster(movie.posterUrl)
         }
 
         override fun getCount(): Int = movies.size

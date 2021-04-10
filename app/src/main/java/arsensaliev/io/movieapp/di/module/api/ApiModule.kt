@@ -18,7 +18,7 @@ class ApiModule {
     @Singleton
     @Provides
     fun api(gson: Gson): IDataSource = Retrofit.Builder()
-        .baseUrl("http://www.omdbapi.com")
+        .baseUrl("https://api.themoviedb.org/3/")
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()

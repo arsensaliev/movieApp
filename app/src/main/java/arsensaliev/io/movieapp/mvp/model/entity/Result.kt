@@ -6,12 +6,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Rating(
-    @SerializedName("Source")
+data class Result(
+    @SerializedName("results")
     @Expose
-    val source: String? = null,
-
-    @SerializedName("Value")
-    @Expose
-    val value: String? = null
+    val results: List<Movie> = ArrayList()
 ) : Parcelable

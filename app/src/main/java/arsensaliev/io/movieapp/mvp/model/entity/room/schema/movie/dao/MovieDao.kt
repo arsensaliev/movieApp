@@ -35,6 +35,6 @@ interface MovieDao {
     @Query("SELECT * FROM RoomMovie")
     fun getAll(): List<RoomMovie>
 
-    @Query("SELECT * FROM RoomMovie WHERE imdbID = :id LIMIT 1")
+    @Query("SELECT * FROM RoomMovie WHERE id = :id LIMIT 1")
     fun findById(id: String): RoomMovie?
 }

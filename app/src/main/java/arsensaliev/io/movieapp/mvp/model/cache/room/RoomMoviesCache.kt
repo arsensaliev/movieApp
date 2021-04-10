@@ -11,15 +11,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class RoomMoviesCache(val db: Database) : IMoviesCache {
 
     override fun getMovies() = Single.fromCallable {
-        db.movieDao.getAll().map { roomMovie ->
-            Movie(roomMovie)
-        }
+        db.movieDao.getAll().map { roomMovie -> Movie(roomMovie) }
     }
 
-    override fun putMovies(movies: List<Movie>) = Completable.fromAction {
-        val roomMovies = movies.map { movie ->
-            RoomMovie(movie)
-        }
+    override fun putMovies(movies: List<Movie>): Completable = Completable.fromAction {
+        val roomMovies = movies.map { movie -> RoomMovie(movie) }
 
         db.movieDao.insert(roomMovies)
     }.subscribeOn(Schedulers.io())

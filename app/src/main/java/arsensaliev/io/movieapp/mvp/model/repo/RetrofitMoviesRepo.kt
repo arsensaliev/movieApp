@@ -10,11 +10,10 @@ class RetrofitMoviesRepo(
     val networkStatus: INetworkStatus,
     val cache: IMoviesCache
 ) : IMoviesRepo {
-
     override fun getMovies() = networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
-            api.getMovies().flatMap { movies ->
-                cache.putMovies(movies).toSingleDefault(movies)
+            api.getMovies("f5eec4a8eba4e9ee6ae7c75783c0632a").flatMap { movies ->
+                cache.putMovies(movies.results).toSingleDefault(movies.results)
             }
         } else {
             cache.getMovies()
