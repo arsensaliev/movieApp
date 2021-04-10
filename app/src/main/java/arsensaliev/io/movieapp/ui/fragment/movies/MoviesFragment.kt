@@ -30,7 +30,9 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView, BackButtonListener {
     ) = FragmentMoviesBinding.inflate(inflater, container, false).also { ui = it }.root
 
     override fun init() {
-        ui?.rvMovies?.layoutManager = LinearLayoutManager(requireContext())
+        val mLayoutManager = LinearLayoutManager(requireContext())
+        mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        ui?.rvMovies?.layoutManager = mLayoutManager
         adapter = MoviesRVAdapter(presenter.moviesListPresenter).apply {
             App.instance.appComponent.inject(this)
         }
